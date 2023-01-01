@@ -17,3 +17,21 @@ Spawn a shell within the project's environment:
 poetry shell
 ```
 
+
+## Unit Tests
+
+To run the unit-tests, use:
+
+```
+pytest
+```
+
+
+## Formatting
+
+To run formatting, use:
+
+```
+black evokity tests
+```
+

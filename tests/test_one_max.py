@@ -69,4 +69,4 @@ def test_one_max():
     algo.evolve()
 
     best_solution = algo.execute()
-    assert best_solution == [1]*10
+    assert best_solution == [1] * 10
