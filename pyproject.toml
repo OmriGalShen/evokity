@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "evolutionary-mini-project"
+version = "0.1.0"
+description = ""
+authors = ["amitkummer <amit.kummer@gmail.com>"]
+readme = "README.md"
+packages = [{include = "evolutionary_mini_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+eckity = "^0.2.3"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
