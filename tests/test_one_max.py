@@ -16,6 +16,7 @@ from eckity.subpopulation import Subpopulation
 from eckity.termination_checkers.threshold_from_target_termination_checker import (
     ThresholdFromTargetTerminationChecker,
 )
+from evokity.mutations import VectorShuffleIndexes
 
 
 class OneMaxEvaluator(SimpleIndividualEvaluator):
@@ -34,7 +35,8 @@ class OneMaxEvaluator(SimpleIndividualEvaluator):
         return sum(individual.vector)
 
 
-def test_one_max():
+def test_one_max_shuffle_indexes():
+    "Test vector index shuffling mutation."
     algo = SimpleEvolution(
         Subpopulation(
             creators=GABitStringVectorCreator(length=10),
@@ -50,6 +52,7 @@ def test_one_max():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
+                VectorShuffleIndexes(probability=0.5, n=10),
             ],
             selection_methods=[
                 # (selection method, selection probability) tuple
