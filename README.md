@@ -24,6 +24,7 @@ To run the unit-tests, use:
 
 ```
 pytest
+pytest -s // To show captured stdout.
 ```
 
 

@@ -1,9 +1,10 @@
 import random
 from eckity.evaluators.simple_population_evaluator import Individual
+from eckity.genetic_encodings.gp.tree.tree_individual import Tree
 from eckity.genetic_operators.mutations.vector_n_point_mutation import (
     VectorNPointMutation,
 )
-
+from eckity.genetic_operators.genetic_operator import GeneticOperator
 
 class VectorShuffleIndexes(VectorNPointMutation):
     """
@@ -41,3 +42,12 @@ class VectorShuffleIndexes(VectorNPointMutation):
 
         self.applied_individuals = individuals
         return succeeded, individuals
+
+
+class TreeShrinkMutation(GeneticOperator):
+    def __init__(self, probability=1, arity=1, events=None):
+        super().__init__(probability=probability, arity=arity, events=events)
+
+    def apply(self, individuals: list[Tree]) -> list[Tree]:
+        # TODO: Implement this.
+        return individuals
