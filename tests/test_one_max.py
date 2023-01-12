@@ -11,6 +11,7 @@ from eckity.genetic_operators.mutations.vector_random_mutation import (
     BitStringVectorNFlipMutation,
 )
 from eckity.genetic_operators.selections.tournament_selection import TournamentSelection
+from eckity.genetic_operators.selections.elitism_selection import ElitismSelection
 from eckity.statistics.best_average_worst_statistics import BestAverageWorstStatistics
 from eckity.subpopulation import Subpopulation
 from eckity.termination_checkers.threshold_from_target_termination_checker import (
@@ -18,6 +19,7 @@ from eckity.termination_checkers.threshold_from_target_termination_checker impor
 )
 from evokity.mutations import VectorShuffleIndexesMutation
 from evokity.crossovers import VectorUniformCrossover
+from evokity.selection import RouletteSelection
 
 
 class OneMaxEvaluator(SimpleIndividualEvaluator):
@@ -102,6 +104,46 @@ def test_one_max_uniform_crossover():
         breeder=SimpleBreeder(),
         max_workers=4,
         max_generation=500,
+        termination_checker=ThresholdFromTargetTerminationChecker(
+            optimal=100, threshold=0.0
+        ),
+        statistics=BestAverageWorstStatistics(),
+    )
+
+    # evolve the generated initial population
+    algo.evolve()
+
+    best_solution = algo.execute()
+    assert best_solution == [1] * 10
+
+def test_one_max_roulette_selection():
+    """Test roulette selection."""
+    algo = SimpleEvolution(
+        Subpopulation(
+            creators=GABitStringVectorCreator(length=10),
+            population_size=30,
+            # user-defined fitness evaluation method
+            evaluator=OneMaxEvaluator(),
+            # maximization problem (fitness is sum of values), so higher fitness is better
+            higher_is_better=True,
+            elitism_rate=1 / 30,
+            # genetic operators sequence to be applied in each generation
+            operators_sequence=[
+                VectorUniformCrossover(probability=0.5),
+                BitStringVectorNFlipMutation(
+                    probability=0.2, probability_for_each=0.05, n=10
+                ),
+                VectorShuffleIndexesMutation(probability=0.5, n=10),
+            ],
+            selection_methods=[
+                # (selection method, selection probability) tuple
+                (ElitismSelection(5), 1)
+                #(RouletteSelection(k=3), 1)
+            ],
+        ),
+        breeder=SimpleBreeder(),
+        max_workers=4,
+        max_generation=2000,
         termination_checker=ThresholdFromTargetTerminationChecker(
             optimal=100, threshold=0.0
         ),
