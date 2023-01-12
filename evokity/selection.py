@@ -43,3 +43,32 @@ class RouletteSelection(SelectionMethod):
             dest_inds.append(individual.clone())
         self.selected_individuals = dest_inds
         return dest_inds
+
+class RandomSelection(SelectionMethod):
+    def __init__(self, k: int, higher_is_better=False, events=None):
+        """
+        Randonly select 'k' individuals.
+        Parameters
+        ----------
+        k: int
+            Number of selected individuals.
+        Returns
+        -------
+            List of length 'k' of chosen individuals.
+        """
+        super().__init__(events=events, higher_is_better=higher_is_better)
+        self.k = k
+        self.higher_is_better = higher_is_better
+
+    def select(self, source_inds, dest_inds):
+        """
+        Parameters
+        ----------
+        source_inds: Source individuals to select from.
+        dest_inds: List which selected individuals will be appended to.
+        """
+        chosen = random.sample(source_inds, self.k)
+        for individual in chosen:
+            dest_inds.append(individual.clone())
+        self.selected_individuals = dest_inds
+        return dest_inds
