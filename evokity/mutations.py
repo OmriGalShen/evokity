@@ -9,7 +9,7 @@ from eckity.genetic_operators.mutations.vector_n_point_mutation import (
 from eckity.genetic_operators.genetic_operator import GeneticOperator
 
 
-class VectorShuffleIndexes(VectorNPointMutation):
+class VectorShuffleIndexesMutation(VectorNPointMutation):
     """
     Uniform N Point indexes shuffle mutation.
     """
