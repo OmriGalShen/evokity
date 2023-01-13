@@ -2,6 +2,7 @@ from copy import deepcopy
 import random
 from eckity.genetic_operators.selections.selection_method import SelectionMethod
 
+
 class RouletteSelection(SelectionMethod):
     def __init__(self, k: int, higher_is_better=False, events=None):
         """
@@ -25,9 +26,11 @@ class RouletteSelection(SelectionMethod):
         source_inds: Source individuals to select from.
         dest_inds: List which selected individuals will be appended to.
         """
-        sorted_individuals = sorted(source_inds,
-                        key=lambda ind: ind.get_augmented_fitness(),
-                        reverse=self.higher_is_better)
+        sorted_individuals = sorted(
+            source_inds,
+            key=lambda ind: ind.get_augmented_fitness(),
+            reverse=self.higher_is_better,
+        )
         sum_fits = sum(ind.get_augmented_fitness() for ind in source_inds)
         chosen = []
         for _ in range(self.k):
@@ -43,6 +46,7 @@ class RouletteSelection(SelectionMethod):
             dest_inds.append(individual.clone())
         self.selected_individuals = dest_inds
         return dest_inds
+
 
 class RandomSelection(SelectionMethod):
     def __init__(self, k: int, higher_is_better=False, events=None):
@@ -73,6 +77,7 @@ class RandomSelection(SelectionMethod):
         self.selected_individuals = dest_inds
         return dest_inds
 
+
 class StochasticUniversalSelection(SelectionMethod):
     def __init__(self, k: int, higher_is_better=False, events=None):
         """
@@ -97,12 +102,14 @@ class StochasticUniversalSelection(SelectionMethod):
         dest_inds: List which selected individuals will be appended to.
         """
         sum_fits = sum(ind.get_augmented_fitness() for ind in source_inds)
-        sorted_individuals = sorted(source_inds,
+        sorted_individuals = sorted(
+            source_inds,
             key=lambda ind: ind.get_augmented_fitness(),
-            reverse=self.higher_is_better)
+            reverse=self.higher_is_better,
+        )
         distance = sum_fits / float(self.k)
         start = random.uniform(0, distance)
-        points = [start + i*distance for i in range(self.k)]
+        points = [start + i * distance for i in range(self.k)]
         chosen = []
 
         for p in points:
@@ -117,5 +124,3 @@ class StochasticUniversalSelection(SelectionMethod):
             dest_inds.append(individual.clone())
         self.selected_individuals = dest_inds
         return dest_inds
-
-

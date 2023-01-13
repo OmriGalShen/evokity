@@ -11,7 +11,6 @@ def test_vector_roulette_selction():
     individual1.vector = [0, 0, 0, 0, 0]
     individual2.vector = [1, 1, 1, 1, 1]
 
-    
     individuals = [individual1, individual2]
     selected = selection.select(individuals, [])
     assert len(selected) == 1

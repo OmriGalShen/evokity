@@ -19,7 +19,11 @@ from eckity.termination_checkers.threshold_from_target_termination_checker impor
 )
 from evokity.mutations import VectorShuffleIndexesMutation
 from evokity.crossovers import VectorUniformCrossover
-from evokity.selection import RouletteSelection, RandomSelection, StochasticUniversalSelection
+from evokity.selection import (
+    RouletteSelection,
+    RandomSelection,
+    StochasticUniversalSelection,
+)
 
 
 class OneMaxEvaluator(SimpleIndividualEvaluator):
@@ -77,6 +81,7 @@ def test_one_max_shuffle_indexes():
     best_solution = algo.execute()
     assert best_solution == [1] * 10
 
+
 def test_one_max_uniform_crossover():
     "Test vector uniform crossover."
     algo = SimpleEvolution(
@@ -116,6 +121,7 @@ def test_one_max_uniform_crossover():
     best_solution = algo.execute()
     assert best_solution == [1] * 10
 
+
 def test_one_max_roulette_selection():
     """Test roulette selection."""
     algo = SimpleEvolution(
@@ -135,9 +141,7 @@ def test_one_max_roulette_selection():
                 ),
                 VectorShuffleIndexesMutation(probability=0.5, n=10),
             ],
-            selection_methods=[
-                (RouletteSelection(k=3), 1)
-            ],
+            selection_methods=[(RouletteSelection(k=3), 1)],
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
@@ -153,6 +157,7 @@ def test_one_max_roulette_selection():
 
     best_solution = algo.execute()
     assert best_solution == [1] * 10
+
 
 def test_one_max_random_selection():
     """Test roulette selection."""
@@ -173,9 +178,7 @@ def test_one_max_random_selection():
                 ),
                 VectorShuffleIndexesMutation(probability=0.5, n=10),
             ],
-            selection_methods=[
-                (RandomSelection(5), 1)
-            ],
+            selection_methods=[(RandomSelection(5), 1)],
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
@@ -191,6 +194,7 @@ def test_one_max_random_selection():
 
     best_solution = algo.execute()
     assert best_solution == [1] * 10
+
 
 def test_one_max_stochastic_selection():
     """Test stochastic selection."""
@@ -211,9 +215,7 @@ def test_one_max_stochastic_selection():
                 ),
                 VectorShuffleIndexesMutation(probability=0.5, n=10),
             ],
-            selection_methods=[
-                (StochasticUniversalSelection(5), 1)
-            ],
+            selection_methods=[(StochasticUniversalSelection(5), 1)],
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
