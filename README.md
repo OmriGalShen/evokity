@@ -1,5 +1,6 @@
-# Evolutionary Mini Project
+# Evokity
 
+Collection of essential [Evolutionary Computaion Kit](https://github.com/EC-KitY/EC-KitY) utilities.
 
 ## Development
 
