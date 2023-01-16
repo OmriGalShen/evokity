@@ -1,9 +1,9 @@
-.PHONY: lint format test
+.PHONY: lint format test check-format
 
 lint: **/*.py
 	mypy evokity tests
 
-check-format: **/*.pt
+check-format: **/*.py
 	black --check .
 
 format: **/*.py
