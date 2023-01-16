@@ -74,6 +74,7 @@ class TreeShrinkMutation(GeneticOperator):
                 subtree.tree = individual.random_subtree()
                 sub_subtree = subtree.random_subtree()
                 index = index_of_subtree(individual.tree, subtree.tree)
+                assert index is not None
                 replace_subtree(individual, index, sub_subtree)
 
         self.applied_individuals = individuals
