@@ -1,6 +1,4 @@
-from eckity.genetic_encodings.gp.tree.tree_individual import Tree
 import pytest
-from evokity.mutations import TreeShrinkMutation
 from eckity.creators.gp_creators.ramped_hh import RampedHalfAndHalfCreator
 from eckity.genetic_encodings.gp.tree.functions import (
     f_add,
@@ -15,6 +13,9 @@ from eckity.genetic_encodings.gp.tree.functions import (
     f_inv,
     f_neg,
 )
+from eckity.genetic_encodings.gp.tree.tree_individual import Tree
+
+from evokity.mutations import TreeShrinkMutation
 
 
 @pytest.fixture
@@ -46,14 +47,14 @@ def test_tree_shrink_basic(individuals):
     mutator = TreeShrinkMutation()
     mutated_individuals = mutator.apply(individuals)
     mutated = mutated_individuals[0]
-    individial = individuals[0]
-    assert mutated.tree != individial.tree
-    assert len(mutated.tree) < len(individial.tree)
+    individual = individuals[0]
+    assert mutated.tree != individual.tree
+    assert len(mutated.tree) < len(individual.tree)
 
 
 def test_tree_no_shrink(individuals):
     mutator = TreeShrinkMutation(probability=0)
     mutated_individuals = mutator.apply(individuals)
     mutated = mutated_individuals[0]
-    individial = individuals[0]
-    assert mutated.tree == individial.tree
+    individual = individuals[0]
+    assert mutated.tree == individual.tree

@@ -1,10 +1,11 @@
-from evokity.crossovers import VectorUniformCrossover
-from eckity.genetic_encodings.ga.bit_string_vector import BitStringVector
 from eckity.fitness.simple_fitness import SimpleFitness
+from eckity.genetic_encodings.ga.bit_string_vector import BitStringVector
+
+from evokity.crossovers import VectorUniformCrossover
 
 
 def test_uniform_crossover_basic():
-    "Test we get a permutation with shuffling probablity set to 1"
+    """Test we get a permutation with shuffling probability set to 1"""
     crossover = VectorUniformCrossover()
     individual1 = BitStringVector(SimpleFitness(), length=5)
     individual2 = BitStringVector(SimpleFitness(), length=5)

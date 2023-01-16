@@ -26,6 +26,7 @@ from eckity.termination_checkers.threshold_from_target_termination_checker impor
 from examples.treegp.non_sklearn_mode.symbolic_regression.sym_reg_evaluator import (
     SymbolicRegressionEvaluator,
 )
+
 from evokity.mutations import TreeShrinkMutation
 
 

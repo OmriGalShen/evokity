@@ -1,12 +1,12 @@
-from copy import deepcopy
 import random
+from copy import deepcopy
 from typing import Optional
-from eckity.evaluators.simple_population_evaluator import Individual
+
 from eckity.genetic_encodings.gp.tree.tree_individual import Tree
+from eckity.genetic_operators.genetic_operator import GeneticOperator
 from eckity.genetic_operators.mutations.vector_n_point_mutation import (
     VectorNPointMutation,
 )
-from eckity.genetic_operators.genetic_operator import GeneticOperator
 
 
 class VectorShuffleIndexesMutation(VectorNPointMutation):
@@ -22,29 +22,39 @@ class VectorShuffleIndexesMutation(VectorNPointMutation):
         Attempt to perform the mutation operator
         Parameters
         ----------
-        individuals : list of individuals
-            individuals to mutate
+        individuals : list of individuals to mutate
         attempt_num : int
             Current attempt number
         Returns
         ----------
         tuple of (bool, list of individuals)
-            first return value determines if the the attempt succeeded
+            first return value determines if the attempt succeeded
             second return value is the operator result
         """
         succeeded = True
+
         for individual in individuals:
-            for i in range(self.n):
+            selected_n_points_indexes = random.sample(
+                range(individual.size()), k=self.n
+            )
+            for i in selected_n_points_indexes:
                 if random.random() < self.probability:
-                    swap_indx = random.randint(0, individual.size() - 2)
-                    if swap_indx >= i:
-                        swap_indx += 1
-                    tmp = individual.cell_value(swap_indx)
-                    individual.set_cell_value(swap_indx, individual.cell_value(i))
-                    individual.set_cell_value(i, tmp)
+                    swap_index = get_random_different_index(i, individual.size())
+                    swap_values(individual, i, swap_index)
 
         self.applied_individuals = individuals
         return succeeded, individuals
+
+
+def get_random_different_index(i, size):
+    index_list = [j for j in range(size) if j != i]
+    return random.choice(index_list)
+
+
+def swap_values(individual, i, swap_index):
+    tmp = individual.cell_value(swap_index)
+    individual.set_cell_value(swap_index, individual.cell_value(i))
+    individual.set_cell_value(i, tmp)
 
 
 class TreeShrinkMutation(GeneticOperator):

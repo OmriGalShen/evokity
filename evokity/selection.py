@@ -1,5 +1,5 @@
-from copy import deepcopy
 import random
+
 from eckity.genetic_operators.selections.selection_method import SelectionMethod
 
 
@@ -51,7 +51,7 @@ class RouletteSelection(SelectionMethod):
 class RandomSelection(SelectionMethod):
     def __init__(self, k: int, higher_is_better=False, events=None):
         """
-        Randonly select 'k' individuals.
+        Randomly select 'k' individuals.
         Parameters
         ----------
         k: int
@@ -81,7 +81,7 @@ class RandomSelection(SelectionMethod):
 class StochasticUniversalSelection(SelectionMethod):
     def __init__(self, k: int, higher_is_better=False, events=None):
         """
-        Randonly select 'k' individuals.
+        Randomly select 'k' individuals.
         Parameters
         ----------
         k: int

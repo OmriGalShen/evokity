@@ -11,14 +11,14 @@ from eckity.genetic_operators.mutations.vector_random_mutation import (
     BitStringVectorNFlipMutation,
 )
 from eckity.genetic_operators.selections.tournament_selection import TournamentSelection
-from eckity.genetic_operators.selections.elitism_selection import ElitismSelection
 from eckity.statistics.best_average_worst_statistics import BestAverageWorstStatistics
 from eckity.subpopulation import Subpopulation
 from eckity.termination_checkers.threshold_from_target_termination_checker import (
     ThresholdFromTargetTerminationChecker,
 )
-from evokity.mutations import VectorShuffleIndexesMutation
+
 from evokity.crossovers import VectorUniformCrossover
+from evokity.mutations import VectorShuffleIndexesMutation
 from evokity.selection import (
     RouletteSelection,
     RandomSelection,
@@ -43,7 +43,7 @@ class OneMaxEvaluator(SimpleIndividualEvaluator):
 
 
 def test_one_max_shuffle_indexes():
-    "Test vector index shuffling mutation."
+    """Test vector index shuffling mutation."""
     algo = SimpleEvolution(
         Subpopulation(
             creators=GABitStringVectorCreator(length=10),

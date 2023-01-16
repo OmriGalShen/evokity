@@ -2,25 +2,21 @@ import random
 from copy import deepcopy
 from typing import List
 
-from eckity.genetic_operators.genetic_operator import GeneticOperator
 from eckity.genetic_encodings.ga.vector_individual import Vector
-from tests.test_tree_shrink_mutation import individuals
+from eckity.genetic_operators.genetic_operator import GeneticOperator
 
 
 class VectorUniformCrossover(GeneticOperator):
     def __init__(self, probability=1, events=None):
         """
-        Vector N Point Mutation.
-
-        Randomly chooses N vector cells and performs a small change in their values.
+        Vector uniform crossover
+        Given 2 vectors for every corresponding elements (same index)
+        preform a switch in values based on given probability.
 
         Parameters
         ----------
         probability : float
-            The probability of the mutation operator to be applied
-
-        arity : int
-            The number of individuals this mutation is applied on
+            The probability of the crossover operator to be applied to each vector element
 
         events: list of strings
             Events to publish before/after the mutation operator
@@ -31,17 +27,16 @@ class VectorUniformCrossover(GeneticOperator):
 
     def apply(self, individuals: List[Vector]) -> List[Vector]:
         """
-        Attempt to perform the mutation operator
+        Attempt to perform the crossover operator
 
         Parameters
         ----------
-        individuals : list of individuals
-            individuals to perform crossover on
+        individuals : list of individuals to perform crossover on
 
         Returns
         ----------
         list of individuals
-            individuals after the crossover
+        individuals after the crossover
         """
         individuals = deepcopy(individuals)
         self.individuals = individuals
