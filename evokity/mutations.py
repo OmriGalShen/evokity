@@ -64,17 +64,17 @@ class TreeShrinkMutation(GeneticOperator):
         """
         individuals = deepcopy(individuals_)
         for individual in individuals:
+            copy = deepcopy(individual)
             if random.random() > self.probability:
                 continue
 
-            # Convert subtree list to a `Tree` object, using deepcopy hackery.
-            subtree = deepcopy(individual)
-            subtree.tree = individual.random_subtree()
-            sub_subtree = subtree.random_subtree()
-            index = index_of_subtree(individual.tree, subtree.tree)
-            assert index is not None
-
-            replace_subtree(individual, index, sub_subtree)
+            while individual.tree == copy.tree:
+                # Convert subtree list to a `Tree` object, using deepcopy hackery.
+                subtree = deepcopy(individual)
+                subtree.tree = individual.random_subtree()
+                sub_subtree = subtree.random_subtree()
+                index = index_of_subtree(individual.tree, subtree.tree)
+                replace_subtree(individual, index, sub_subtree)
 
         self.applied_individuals = individuals
         return individuals
