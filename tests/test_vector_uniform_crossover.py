@@ -11,8 +11,9 @@ def test_uniform_crossover_basic():
     individual2 = BitStringVector(SimpleFitness(), length=5)
     individual1.vector = [0, 0, 0, 0, 0]
     individual2.vector = [1, 1, 1, 1, 1]
-    mutated_individuals = crossover.apply([individual1, individual2])
-    assert individual1.vector != mutated_individuals[0]
-    assert individual2.vector != mutated_individuals[1]
-    assert individual1.vector == mutated_individuals[1].vector
-    assert individual2.vector == mutated_individuals[0].vector
+    individuals = [individual1.clone(), individual2.clone()]
+    mutated_individuals = crossover.apply(individuals)
+    assert mutated_individuals[0].vector != individual1.vector
+    assert mutated_individuals[1].vector != individual2.vector
+    assert mutated_individuals[1].vector == individual1.vector
+    assert mutated_individuals[0].vector == individual2.vector
