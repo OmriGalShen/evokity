@@ -9,6 +9,7 @@ Collection of essential <a href=https://github.com/EC-KitY/EC-KitY> Evolutionary
 </p>
 
 # Table of Contents
+
 1. [Introduction](#introduction)
 2. [Development](#development)
 3. [Project Structure and Interface](#project-structure-and-interface)
@@ -19,42 +20,37 @@ Collection of essential <a href=https://github.com/EC-KitY/EC-KitY> Evolutionary
 ## Introduction
 
 <a href=https://github.com/EC-KitY/EC-KitY> EC-KitY </a>
-is comprehensive toolkit evolutionary computation algorithms written in Python. <br/>
-<strong>Evokity</strong> is an evolutionary computation collection that serves as extension and complement library to EC-KitY.<br/>
+is comprehensive toolkit evolutionary computation algorithms written in Python.  <br/>
+<strong>Evokity</strong> is an evolutionary computation collection that serves as extension and complement library to EC-KitY.  
 
 #### Motivation
+
 EC-KitY is an accessible and generic tool kit for doing evolutionary computation,  
-we saw potential to add variety of utility classes to extend it. 
+we saw potential to add variety of utility classes to extend it.
 
 #### Evokity Main Goals:
 
 - Extend EC-KitY with new capabilities using new operators such as crossover, mutations and selections.
-- New operators can be served to accommodate both Genetic Algorithm (GA) and tree-based Genetic Programming (GP) which are used in
+- New operators can be served to accommodate both Genetic Algorithm (GA) and tree-based Genetic Programming (GP) which
+  are used in
   EC-KitY.
 - Easy to maintain and extend project with emphasise on unit tests, linting & formatting and continuous integration.
 - Project is public, free and accessible.
 
 #### Currently Supported Operators:
-Crossover operators:
-- VectorUniformCrossover
-- VectorBlendCrossover
 
-Mutations operators:
-- VectorShuffleIndexesMutation
-- TreeShrinkMutation
+| Crossover operators    | Mutations operators          | Selection operators          |
+|------------------------|------------------------------|------------------------------|
+| VectorUniformCrossover | VectorShuffleIndexesMutation | RouletteSelection            |
+| VectorBlendCrossover   | TreeShrinkMutation           | RandomSelection              |
+|                        |                              | StochasticUniversalSelection |
 
-Selection operators:
-- RouletteSelection
-- RandomSelection
-- StochasticUniversalSelection
+#### Future Ideas and Goals:
 
-#### Future Ideas and Goals:  
-
-
-Add more utility classes to be used with EC-KitY such:  
+Add more utility classes to be used with EC-KitY such:
 
 - New Statistics
-- New Genetic encoding 
+- New Genetic encoding
 - New Breeder
 - Etc.
 
@@ -92,14 +88,50 @@ black evokity tests
 ```
 
 ## Project Structure and Interface
-TODO
+
+Currently, Evokity supports 7 genetic operators:  
+2 crossovers, 2 mutations and 3 selections.
+
+Category: Crossovers  
+File: '.evokity/crossovers.py'
+
+| Name            | VectorUniformCrossover | VectorBlendCrossover |
+|-----------------|------------------------|----------------------|
+| Name            |                        |                      |
+| Description     |                        |                      | 
+| Individual Type |                        |                      |
+| Parameters      |                        |                      |
+| Tests           |                        |                      |
+
+Category: Mutation  
+File: 'evokity/mutations.py'
+
+| Name            | VectorShuffleIndexesMutation | TreeShrinkMutation |
+|-----------------|------------------------------|--------------------|
+| Name            |                              |                    |
+| Description     |                              |                    | 
+| Individual Type |                              |                    |
+| Parameters      |                              |                    |
+| Tests           |                              |                    |
+
+Category: Selections  
+File: 'evokity/selection.py'
+
+| Name            | RouletteSelection | RandomSelection | StochasticUniversalSelection |
+|-----------------|-------------------|-----------------|------------------------------|
+| Name            |                   |                 |                              |
+| Description     |                   |                 |                              | 
+| Individual Type |                   |                 |                              |
+| Parameters      |                   |                 |                              |
+| Tests           |                   |                 |                              |
 
 ## Analysis
+
 TODO
 
 ## Final Thoughts
-TODO
 
+TODO
 
 ## About
 
