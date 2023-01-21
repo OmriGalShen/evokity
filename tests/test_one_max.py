@@ -21,7 +21,11 @@ from eckity.termination_checkers.threshold_from_target_termination_checker impor
     ThresholdFromTargetTerminationChecker,
 )
 
-from evokity.crossovers import VectorUniformCrossover, FloatVectorBlendCrossover
+from evokity.crossovers import (
+    VectorUniformCrossover,
+    FloatVectorBlendCrossover,
+    FloatVectorMeanCrossover,
+)
 from evokity.mutations import VectorShuffleIndexesMutation
 from evokity.selection import (
     RouletteSelection,
@@ -130,7 +134,7 @@ def test_one_max_float_vector_blend_crossover():
     # Initialize the evolutionary algorithm
     algo = SimpleEvolution(
         Subpopulation(
-            creators=GAFloatVectorCreator(bounds=(0.0, 1.0), length=10),
+            creators=GAFloatVectorCreator(bounds=(0.0, 1.0), length=4),
             population_size=300,
             # user-defined fitness evaluation method
             evaluator=OneMaxEvaluator(),
@@ -140,7 +144,7 @@ def test_one_max_float_vector_blend_crossover():
             # genetic operators sequence to be applied in each generation
             operators_sequence=[
                 FloatVectorBlendCrossover(probability=0.5),
-                FloatVectorUniformNPointMutation(probability=0.3, n=5),
+                FloatVectorUniformNPointMutation(probability=0.3, n=2),
             ],
             selection_methods=[
                 # (selection method, selection probability) tuple
@@ -149,6 +153,47 @@ def test_one_max_float_vector_blend_crossover():
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
+        max_generation=1500,
+        termination_checker=ThresholdFromTargetTerminationChecker(
+            optimal=100, threshold=0.0
+        ),
+        statistics=BestAverageWorstStatistics(),
+    )
+
+    # evolve the generated initial population
+    algo.evolve()
+
+    result = algo.execute()
+    best_solution = [1.0] * 10
+    tolerance = 0.05
+    assert all(
+        math.isclose(x, y, abs_tol=tolerance) for x, y in zip(result, best_solution)
+    )
+
+
+def test_one_max_float_vector_mean_crossover():
+    # Initialize the evolutionary algorithm
+    algo = SimpleEvolution(
+        Subpopulation(
+            creators=GAFloatVectorCreator(bounds=(0.0, 1.0), length=4),
+            population_size=300,
+            # user-defined fitness evaluation method
+            evaluator=OneMaxEvaluator(),
+            # maximization problem (fitness is sum of values), so higher fitness is better
+            higher_is_better=True,
+            elitism_rate=1 / 300,
+            # genetic operators sequence to be applied in each generation
+            operators_sequence=[
+                FloatVectorMeanCrossover(probability=0.5),
+                FloatVectorUniformNPointMutation(probability=0.3, n=2),
+            ],
+            selection_methods=[
+                # (selection method, selection probability) tuple
+                (TournamentSelection(tournament_size=3, higher_is_better=True), 1)
+            ],
+        ),
+        breeder=SimpleBreeder(),
+        max_workers=5,
         max_generation=1500,
         termination_checker=ThresholdFromTargetTerminationChecker(
             optimal=100, threshold=0.0

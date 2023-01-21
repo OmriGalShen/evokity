@@ -105,3 +105,51 @@ class FloatVectorBlendCrossover(GeneticOperator):
 
         self.applied_individuals = individuals
         return individuals
+
+
+class FloatVectorMeanCrossover(GeneticOperator):
+    def __init__(self, probability=1, events=None):
+        """
+        Given 2 vectors for every corresponding elements (same index)
+        preform a switch in values based on given probability.
+
+        Parameters
+        ----------
+        probability : float
+            The probability of the crossover operator to be applied to each vector element
+
+        events: list of strings
+            Events to publish before/after the mutation operator
+        """
+        self.individuals = None
+        self.applied_individuals = None
+        super().__init__(probability=probability, arity=2, events=events)
+
+    def apply(self, individuals: List[Vector]) -> List[Vector]:
+        """
+        Attempt to perform the crossover operator
+
+        Parameters
+        ----------
+        individuals : list of individuals to perform crossover on
+
+        Returns
+        ----------
+        list of individuals
+        individuals after the crossover
+        """
+        self.individuals = individuals
+        size = len(individuals[0].vector)
+
+        for i in range(size):
+            if random.random() < self.probability:
+                val1 = individuals[0].cell_value(i)
+                val2 = individuals[1].cell_value(i)
+
+                mean = (val1 + val2) / (2.0)
+
+                individuals[0].set_cell_value(i, mean)
+                individuals[1].set_cell_value(i, mean)
+
+        self.applied_individuals = individuals
+        return individuals
