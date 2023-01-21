@@ -39,11 +39,11 @@ we saw potential to add variety of utility classes to extend it.
 
 #### Currently Supported Operators:
 
-| Crossover operators    | Mutations operators          | Selection operators          |
-|------------------------|------------------------------|------------------------------|
-| VectorUniformCrossover | VectorShuffleIndexesMutation | RouletteSelection            |
-| VectorBlendCrossover   | TreeShrinkMutation           | RandomSelection              |
-|                        |                              | StochasticUniversalSelection |
+| Crossover operators      | Mutations operators                 | Selection operators          |
+|--------------------------|-------------------------------------|------------------------------|
+| VectorUniformCrossover   | VectorShuffleIndexesMutation        | RouletteSelection            |
+| VectorBlendCrossover     | TreeShrinkMutation                  | RandomSelection              |
+| FloatVectorMeanCrossover | FloatVectorMultiplierNPointMutation | StochasticUniversalSelection |
 
 #### Future Ideas and Goals:
 
@@ -95,24 +95,24 @@ Currently, Evokity supports 7 genetic operators:
 Category: Crossovers  
 File: '.evokity/crossovers.py'
 
-| Name            | VectorUniformCrossover | VectorBlendCrossover |
-|-----------------|------------------------|----------------------|
-| Name            |                        |                      |
-| Description     |                        |                      | 
-| Individual Type |                        |                      |
-| Parameters      |                        |                      |
-| Tests           |                        |                      |
+| Name            | VectorUniformCrossover | VectorBlendCrossover | FloatVectorMeanCrossover |
+|-----------------|------------------------|----------------------|--------------------------|
+| Name            |                        |                      |                          |
+| Description     |                        |                      |                          | 
+| Individual Type |                        |                      |                          |
+| Parameters      |                        |                      |                          |
+| Tests           |                        |                      |                          |
 
 Category: Mutation  
 File: 'evokity/mutations.py'
 
-| Name            | VectorShuffleIndexesMutation | TreeShrinkMutation |
-|-----------------|------------------------------|--------------------|
-| Name            |                              |                    |
-| Description     |                              |                    | 
-| Individual Type |                              |                    |
-| Parameters      |                              |                    |
-| Tests           |                              |                    |
+| Name            | VectorShuffleIndexesMutation | TreeShrinkMutation | FloatVectorMultiplierNPointMutation |
+|-----------------|------------------------------|--------------------|-------------------------------------|
+| Name            |                              |                    |                                     |
+| Description     |                              |                    |                                     | 
+| Individual Type |                              |                    |                                     |
+| Parameters      |                              |                    |                                     |
+| Tests           |                              |                    |                                     |
 
 Category: Selections  
 File: 'evokity/selection.py'

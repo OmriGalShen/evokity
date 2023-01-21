@@ -26,7 +26,7 @@ from evokity.crossovers import (
     FloatVectorBlendCrossover,
     FloatVectorMeanCrossover,
 )
-from evokity.mutations import VectorShuffleIndexesMutation
+from evokity.mutations import VectorShuffleIndexesMutation, FloatVectorMultiplierNPointMutation
 from evokity.selection import (
     RouletteSelection,
     RandomSelection,
@@ -88,6 +88,48 @@ def test_one_max_shuffle_indexes():
 
     best_solution = algo.execute()
     assert best_solution == [1] * 10
+
+
+def test_one_max_multiplier_mutation():
+    """Test float vector multiplier mutation."""
+    # Initialize the evolutionary algorithm
+    algo = SimpleEvolution(
+        Subpopulation(
+            creators=GAFloatVectorCreator(bounds=(0.0, 1.0), length=4),
+            population_size=300,
+            # user-defined fitness evaluation method
+            evaluator=OneMaxEvaluator(),
+            # maximization problem (fitness is sum of values), so higher fitness is better
+            higher_is_better=True,
+            elitism_rate=1 / 300,
+            # genetic operators sequence to be applied in each generation
+            operators_sequence=[
+                VectorKPointsCrossover(probability=0.7, k=1),
+                FloatVectorMultiplierNPointMutation(probability=0.3, n=2),
+            ],
+            selection_methods=[
+                # (selection method, selection probability) tuple
+                (TournamentSelection(tournament_size=3, higher_is_better=True), 1)
+            ],
+        ),
+        breeder=SimpleBreeder(),
+        max_workers=4,
+        max_generation=500,
+        termination_checker=ThresholdFromTargetTerminationChecker(
+            optimal=100, threshold=0.0
+        ),
+        statistics=BestAverageWorstStatistics(),
+    )
+
+    # evolve the generated initial population
+    algo.evolve()
+
+    result = algo.execute()
+    best_solution = [1.0] * 10
+    tolerance = 0.05
+    assert all(
+        math.isclose(x, y, abs_tol=tolerance) for x, y in zip(result, best_solution)
+    )
 
 
 def test_one_max_uniform_crossover():
@@ -153,7 +195,7 @@ def test_one_max_float_vector_blend_crossover():
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
-        max_generation=1500,
+        max_generation=500,
         termination_checker=ThresholdFromTargetTerminationChecker(
             optimal=100, threshold=0.0
         ),
@@ -194,7 +236,7 @@ def test_one_max_float_vector_mean_crossover():
         ),
         breeder=SimpleBreeder(),
         max_workers=5,
-        max_generation=1500,
+        max_generation=500,
         termination_checker=ThresholdFromTargetTerminationChecker(
             optimal=100, threshold=0.0
         ),
