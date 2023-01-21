@@ -1,7 +1,6 @@
 from eckity.algorithms.simple_evolution import SimpleEvolution
 from eckity.breeders.simple_breeder import SimpleBreeder
 from eckity.creators.ga_creators.float_vector_creator import GAFloatVectorCreator
-from eckity.evaluators.simple_individual_evaluator import SimpleIndividualEvaluator
 from eckity.genetic_operators.crossovers.vector_k_point_crossover import VectorKPointsCrossover
 from eckity.genetic_operators.mutations.vector_random_mutation import FloatVectorUniformNPointMutation
 from eckity.genetic_operators.selections.tournament_selection import TournamentSelection
@@ -9,17 +8,12 @@ from eckity.statistics.best_average_worst_statistics import BestAverageWorstStat
 from eckity.subpopulation import Subpopulation
 from eckity.termination_checkers.threshold_from_target_termination_checker import ThresholdFromTargetTerminationChecker
 
-from analysis.analysis_utils import TestOperatorWrapper, display_results
+from analysis.analysis_utils import TestOperatorWrapper, display_results, OneMaxEvaluator
 from evokity.crossovers import VectorUniformCrossover, FloatVectorBlendCrossover, FloatVectorMeanCrossover
 
 
-class OneMaxEvaluator(SimpleIndividualEvaluator):
-    def _evaluate_individual(self, individual):
-        return sum(individual.vector)
-
-
 def compare_crossovers():
-    repeats = 1
+    repeats = 100
     length = 10
     threshold = 0.1
     probability = 0.3

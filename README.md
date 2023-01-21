@@ -127,7 +127,13 @@ File: 'evokity/selection.py'
 
 ## Analysis
 
-![Alt text](/analysis/results_images/float_vector_mutations.png?raw=true "Optional Title")
+### Mutations
+![Alt text](/analysis/results_images/float_vector_mutations.png?raw=true)
+### Selections
+![Alt text](/analysis/results_images/selections.png?raw=true)
+### Crossovers
+![Alt text](/analysis/results_images/crossovers.png?raw=true)
+
 
 ## Final Thoughts
 

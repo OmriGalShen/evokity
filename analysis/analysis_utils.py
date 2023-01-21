@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
+from eckity.evaluators.simple_individual_evaluator import SimpleIndividualEvaluator
 from matplotlib import cm
+
+
+class OneMaxEvaluator(SimpleIndividualEvaluator):
+    def _evaluate_individual(self, individual):
+        return sum(individual.vector)
 
 
 class TestOperatorWrapper:
