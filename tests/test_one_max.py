@@ -26,7 +26,10 @@ from evokity.crossovers import (
     FloatVectorBlendCrossover,
     FloatVectorMeanCrossover,
 )
-from evokity.mutations import VectorShuffleIndexesMutation, FloatVectorMultiplierNPointMutation
+from evokity.mutations import (
+    VectorShuffleIndexesNPointMutation,
+    FloatVectorMultiplierNPointMutation,
+)
 from evokity.selection import (
     RouletteSelection,
     RandomSelection,
@@ -67,7 +70,7 @@ def test_one_max_shuffle_indexes():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
-                VectorShuffleIndexesMutation(probability=0.5, n=10),
+                VectorShuffleIndexesNPointMutation(probability=0.5, n=10),
             ],
             selection_methods=[
                 # (selection method, selection probability) tuple
@@ -149,7 +152,7 @@ def test_one_max_uniform_crossover():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
-                VectorShuffleIndexesMutation(probability=0.5, n=10),
+                VectorShuffleIndexesNPointMutation(probability=0.5, n=10),
             ],
             selection_methods=[
                 # (selection method, selection probability) tuple
@@ -271,7 +274,7 @@ def test_one_max_roulette_selection():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
-                VectorShuffleIndexesMutation(probability=0.5, n=10),
+                VectorShuffleIndexesNPointMutation(probability=0.5, n=10),
             ],
             selection_methods=[(RouletteSelection(k=3), 1)],
         ),
@@ -308,7 +311,7 @@ def test_one_max_random_selection():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
-                VectorShuffleIndexesMutation(probability=0.5, n=10),
+                VectorShuffleIndexesNPointMutation(probability=0.5, n=10),
             ],
             selection_methods=[(RandomSelection(5), 1)],
         ),
@@ -345,7 +348,7 @@ def test_one_max_stochastic_selection():
                 BitStringVectorNFlipMutation(
                     probability=0.2, probability_for_each=0.05, n=10
                 ),
-                VectorShuffleIndexesMutation(probability=0.5, n=10),
+                VectorShuffleIndexesNPointMutation(probability=0.5, n=10),
             ],
             selection_methods=[(StochasticUniversalSelection(5), 1)],
         ),

@@ -9,7 +9,7 @@ from eckity.genetic_operators.mutations.vector_n_point_mutation import (
 )
 
 
-class VectorShuffleIndexesMutation(VectorNPointMutation):
+class VectorShuffleIndexesNPointMutation(VectorNPointMutation):
     """
     Uniform N Point indexes shuffle mutation.
     """
@@ -95,7 +95,7 @@ def index_of_subtree(tree: list, subtree: list) -> Optional[int]:
     Return the index of `subtree` in `tree`.
     """
     for i in range(len(tree)):
-        if tree[i: i + len(subtree)] == subtree:
+        if tree[i : i + len(subtree)] == subtree:
             return i
     return None
 
@@ -114,7 +114,7 @@ def replace_subtree(tree: Tree, index: int, new_subtree: list):
     """
     end_i = tree._find_subtree_end([index])
     left_part = tree.tree[:index]
-    right_part = tree.tree[(end_i + 1):]
+    right_part = tree.tree[(end_i + 1) :]
     tree.tree = left_part + new_subtree + right_part
 
 
@@ -138,12 +138,10 @@ class FloatVectorMultiplierNPointMutation(VectorNPointMutation):
         Events to publish before/after the mutation operator
     """
 
-    def __init__(self, probability=1.0, n=1, left_bound=0., right_bound=1., arity=1, events=None):
-        super().__init__(n=n,
-                         probability=probability,
-                         arity=arity,
-                         mut_val_getter=lambda vec, index: vec.get_random_number_in_bounds(index),
-                         events=events)
+    def __init__(
+        self, probability=1.0, n=1, left_bound=0.0, right_bound=1.0, events=None
+    ):
+        super().__init__(probability=probability, arity=1, events=events, n=n)
         self.left_bound = left_bound
         self.right_bound = right_bound
 
@@ -169,7 +167,9 @@ class FloatVectorMultiplierNPointMutation(VectorNPointMutation):
             )
             for i in selected_n_points_indexes:
                 if random.random() < self.probability:
-                    multiplier_factor = random.uniform(self.left_bound, self.right_bound)
+                    multiplier_factor = random.uniform(
+                        self.left_bound, self.right_bound
+                    )
                     value = individual.cell_value(i)
                     new_value = value * multiplier_factor
                     individual.set_cell_value(i, new_value)

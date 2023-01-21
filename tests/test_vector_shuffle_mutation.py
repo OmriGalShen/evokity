@@ -1,12 +1,12 @@
 from eckity.fitness.simple_fitness import SimpleFitness
 from eckity.genetic_encodings.ga.bit_string_vector import BitStringVector
 
-from evokity.mutations import VectorShuffleIndexesMutation
+from evokity.mutations import VectorShuffleIndexesNPointMutation
 
 
 def test_shuffle_basic():
     """Test we get a permutation with shuffling probability set to 1"""
-    mutator = VectorShuffleIndexesMutation(n=5)
+    mutator = VectorShuffleIndexesNPointMutation(n=5)
     individual = BitStringVector(SimpleFitness(), length=5)
     individual.vector = [0, 1, 0, 1, 0]
     individuals = [individual.clone()]
@@ -19,7 +19,7 @@ def test_shuffle_basic():
 
 def test_no_shuffle():
     """Test no mutation happens when mutation probability is set to 0."""
-    mutator = VectorShuffleIndexesMutation(probability=0, n=5)
+    mutator = VectorShuffleIndexesNPointMutation(probability=0, n=5)
     individual = BitStringVector(SimpleFitness(), length=5)
     individual.vector = [0, 1, 0, 1, 0]
     individuals = [individual.clone()]
