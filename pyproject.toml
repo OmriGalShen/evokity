@@ -12,6 +12,7 @@ packages = [{include = "evolutionary_mini_project"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 eckity = "^0.2.3"
+matplotlib  = "3.6.3"
 
 
 [tool.poetry.group.dev.dependencies]

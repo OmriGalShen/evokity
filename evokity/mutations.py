@@ -106,7 +106,7 @@ def replace_subtree(tree: Tree, index: int, new_subtree: list):
 
     Parameters
     ----------
-    subtree - new subtree to replace the some existing subtree in this individual's tree
+    subtree - new subtree to replace some existing subtree in this individual's tree
 
     Returns
     -------
