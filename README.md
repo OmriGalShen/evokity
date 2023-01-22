@@ -217,6 +217,9 @@ The scripts for creating these plots can be found in the `analysis` directory.
 
 ![Alt text](/analysis/results_images/selections.png?raw=true)
 
+Note: RandomSelection was not includes as it didn't coverage to a solution,  
+it's a interesting selection but not useful for practical uses.
+
 ## Crossovers
 
 ![Alt text](/analysis/results_images/crossovers.png?raw=true)
