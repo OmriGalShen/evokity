@@ -219,8 +219,8 @@ The scripts for creating these plots can be found in the `analysis` directory.
 
 Tested using one max problem with the same conditions (probability/threshold/vector length/population_size etc.).  
 We can see the new mutation 'VectorShuffleIndexesNPointMutation' preformed very successfully for this problem.  
-In contrast the new mutation 'VectorShuffleIndexesNPointMutation' preformed rather poorly for this problem as expected  
-as it only reduces the fitness of the effected individual.  
+In contrast the new mutation 'VectorShuffleIndexesNPointMutation' preformed rather poorly  
+for this problem as expected as it only reduces the fitness of the effected individual.  
 (We used multiple between 0-1 as larger than one would create individuals unfitted for the problem)   
     
 ![Alt text](/analysis/results_images/tree_mutations.png?raw=true)  
