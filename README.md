@@ -217,6 +217,9 @@ The scripts for creating these plots can be found in the `analysis` directory.
 
 ![Alt text](/analysis/results_images/selections.png?raw=true)
 
+Note: RandomSelection was not includes as it didn't coverage to a solution,  
+it's a interesting selection but not useful for practical uses.
+
 ## Crossovers
 
 ![Alt text](/analysis/results_images/crossovers.png?raw=true)
@@ -232,6 +235,29 @@ To help with rapid development, we created a simple CI using GitHub Actions for 
 
 - [Amit Kummer](https://github.com/amitkummer "Amit Kummer").
 - [Omri Gal Shenhav](https://github.com/OmriGalShen "Omri Gal Shenhav").
+
+### Citation
+
+```
+@article{eckity2022,
+    author = {Sipper, Moshe and Halperin, Tomer and Tzruia, Itai and  Elyasaf, Achiya},
+    title = {{EC-KitY}: Evolutionary Computation Tool Kit in {Python}},
+    publisher = {arXiv},
+    year = {2022},
+    url = {https://arxiv.org/abs/2207.10367},
+    doi = {10.48550/ARXIV.2207.10367},
+}
+
+@misc{eckity2022git,
+    author = {Sipper, Moshe and Halperin, Tomer and Tzruia, Itai and  Elyasaf, Achiya},
+    title = {{EC-KitY}: Evolutionary Computation Tool Kit in {Python}},
+    year = {2022},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://www.eckity.org/} }
+}
+
+```
 
 # Development
 
