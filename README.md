@@ -210,23 +210,45 @@ The scripts for creating these plots can be found in the `analysis` directory.
 
 ## Mutations
 
-![Alt text](/analysis/results_images/float_vector_mutations.png?raw=true)
-![Alt text](/analysis/results_images/tree_mutations.png?raw=true)
+![Alt text](/analysis/results_images/float_vector_mutations.png?raw=true)  
 
+Tested using one max problem with the same conditions (probability/threshold/vector length/population_size etc.).  
+We can see the new mutation 'VectorShuffleIndexesNPointMutation' preformed very successfully for this problem.  
+In contrast the new mutation 'VectorShuffleIndexesNPointMutation' preformed rather poorly for this problem as expected  
+as it only reduces the fitness of the effected individual.  
+(We used multiple between 0-1 as larger than one would create individuals unfitted for the problem)   
+    
+![Alt text](/analysis/results_images/tree_mutations.png?raw=true)  
+
+Tested using symbolic regression problem with the same conditions.  
+We can observe that the new mutation 'TreeShrinkMutation' preformed better for this problem  
+in comparison to EC-KitY tree mutation 'SubtreeMutation'.  
+  
 ## Selections
 
-![Alt text](/analysis/results_images/selections.png?raw=true)
+![Alt text](/analysis/results_images/selections.png?raw=true)  
+
+Tested using one max problem with the same conditions.  
+We can observe that the new selections 'StochasticUniversalSelection' using k=5   
+and RouletteSelection using k=5 preformed rather well,  
+while other tested variants of the new selections preformed poorly in comparison.  
 
 Note: RandomSelection was not includes as it didn't coverage to a solution,  
-it's a interesting selection but not useful for practical uses.
-
+it's a interesting selection to have but not useful for practical uses.
+  
 ## Crossovers
 
-![Alt text](/analysis/results_images/crossovers.png?raw=true)
+![Alt text](/analysis/results_images/crossovers.png?raw=true)  
 
+Tested using one max problem with the same conditions.  
+We can observe the new crossover 'VectorUniformCrossover' preformed better for this problem   
+in comparison to EC-KitY mutation 'VectorKPointsCrossover' with different variants.   
+The new crossovers 'FloatVectorBlendCrossover' and 'FloatVectorMeanCrossover' preformed  
+slightly worst for the problem in comparison to EC-KitY mutation 'VectorKPointsCrossover'.  
+  
 # Final Thoughts
 
-Working with EC-KitY was a fairly straightforward and smooth exprience, thanks to the fact that it's open-source
+Working with EC-KitY was a fairly straightforward and smooth experience, thanks to the fact that it's open-source
 and has various examples, which cover most use cases.
 
 To help with rapid development, we created a simple CI using GitHub Actions for running unit-tests, linting and formatting on each push and pull request. This helped the development process a lot, by assuring unit tests are not randomly failing, code quality is not decreasing and readability is at a satisfactory level.
