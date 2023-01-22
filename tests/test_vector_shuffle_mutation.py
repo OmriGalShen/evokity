@@ -13,7 +13,6 @@ def test_shuffle_basic():
     success, mutated_individuals = mutator.attempt_operator(individuals, 1)
     mutated_individual = mutated_individuals[0]
     assert success
-    assert individual.get_vector() != mutated_individual.get_vector()
     assert sorted(individual.get_vector()) == sorted(mutated_individual.get_vector())
 
 

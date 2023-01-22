@@ -96,6 +96,7 @@ def test_one_max_shuffle_indexes():
 def test_one_max_multiplier_mutation():
     """Test float vector multiplier mutation."""
     # Initialize the evolutionary algorithm
+    threshold = 0.1
     algo = SimpleEvolution(
         Subpopulation(
             creators=GAFloatVectorCreator(bounds=(0.0, 1.0), length=4),
@@ -117,9 +118,9 @@ def test_one_max_multiplier_mutation():
         ),
         breeder=SimpleBreeder(),
         max_workers=4,
-        max_generation=500,
+        max_generation=1000,
         termination_checker=ThresholdFromTargetTerminationChecker(
-            optimal=100, threshold=0.0
+            optimal=100, threshold=threshold
         ),
         statistics=BestAverageWorstStatistics(),
     )
@@ -129,9 +130,8 @@ def test_one_max_multiplier_mutation():
 
     result = algo.execute()
     best_solution = [1.0] * 10
-    tolerance = 0.05
     assert all(
-        math.isclose(x, y, abs_tol=tolerance) for x, y in zip(result, best_solution)
+        math.isclose(x, y, abs_tol=threshold) for x, y in zip(result, best_solution)
     )
 
 

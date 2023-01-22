@@ -57,12 +57,13 @@ def swap_values(individual, i, swap_index):
 
 
 class TreeShrinkMutation(GeneticOperator):
-    def __init__(self, probability=1, arity=1, events=None):
+    def __init__(self, probability=1, max_iterations=100, arity=1, events=None):
         """
         This operator shrinks the *individual* by choosing randomly a branch and
         replacing it with one of the branch's arguments (also randomly chosen).
         """
         super().__init__(probability=probability, arity=arity, events=events)
+        self.max_iterations = max_iterations
 
     def apply(self, individuals_: list[Tree]) -> list[Tree]:
         """
@@ -77,7 +78,10 @@ class TreeShrinkMutation(GeneticOperator):
             if random.random() > self.probability:
                 continue
 
-            while individual.tree == copy.tree:
+            modified = False
+            iteration = 0
+            # while not modified and iteration < self.max_iterations:
+            while not modified and iteration < self.max_iterations:
                 # Convert subtree list to a `Tree` object, using deepcopy hackery.
                 subtree = deepcopy(individual)
                 subtree.tree = individual.random_subtree()
@@ -85,6 +89,9 @@ class TreeShrinkMutation(GeneticOperator):
                 index = index_of_subtree(individual.tree, subtree.tree)
                 assert index is not None
                 replace_subtree(individual, index, sub_subtree)
+                if individual.tree != copy.tree:
+                    modified = True
+                iteration += 1
 
         self.applied_individuals = individuals
         return individuals

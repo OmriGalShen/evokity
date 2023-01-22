@@ -70,7 +70,7 @@ def test_symbolic_regression():
             operators_sequence=[
                 SubtreeCrossover(probability=0.9, arity=2),
                 SubtreeMutation(probability=0.2, arity=1),
-                TreeShrinkMutation(probability=0),
+                TreeShrinkMutation(probability=0.4),
                 ERCMutation(probability=0.05, arity=1),
             ],
             selection_methods=[
