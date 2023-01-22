@@ -1,16 +1,31 @@
 from eckity.algorithms.simple_evolution import SimpleEvolution
 from eckity.breeders.simple_breeder import SimpleBreeder
 from eckity.creators.gp_creators.ramped_hh import RampedHalfAndHalfCreator
-from eckity.genetic_encodings.gp.tree.functions import f_add, f_mul, f_sub, f_div, f_sqrt, f_log, f_abs, f_max, f_min, \
-    f_inv, f_neg
+from eckity.genetic_encodings.gp.tree.functions import (
+    f_add,
+    f_mul,
+    f_sub,
+    f_div,
+    f_sqrt,
+    f_log,
+    f_abs,
+    f_max,
+    f_min,
+    f_inv,
+    f_neg,
+)
 from eckity.genetic_operators.crossovers.subtree_crossover import SubtreeCrossover
 from eckity.genetic_operators.mutations.erc_mutation import ERCMutation
 from eckity.genetic_operators.mutations.subtree_mutation import SubtreeMutation
 from eckity.genetic_operators.selections.tournament_selection import TournamentSelection
 from eckity.statistics.best_average_worst_statistics import BestAverageWorstStatistics
 from eckity.subpopulation import Subpopulation
-from eckity.termination_checkers.threshold_from_target_termination_checker import ThresholdFromTargetTerminationChecker
-from examples.treegp.non_sklearn_mode.symbolic_regression.sym_reg_evaluator import SymbolicRegressionEvaluator
+from eckity.termination_checkers.threshold_from_target_termination_checker import (
+    ThresholdFromTargetTerminationChecker,
+)
+from examples.treegp.non_sklearn_mode.symbolic_regression.sym_reg_evaluator import (
+    SymbolicRegressionEvaluator,
+)
 
 from analysis.analysis_utils import display_results, TestOperatorWrapper
 from evokity.mutations import TreeShrinkMutation
@@ -21,20 +36,24 @@ def compare_tree_mutations():
     threshold = 1e-5
     probability = 0.5
     test_subjects = [
-        TestOperatorWrapper("Subtree",
-                            SubtreeMutation(probability=probability)),
-        TestOperatorWrapper("TreeShrink", TreeShrinkMutation(probability=probability, max_iterations=20)),
+        TestOperatorWrapper("Subtree", SubtreeMutation(probability=probability)),
+        TestOperatorWrapper(
+            "TreeShrink", TreeShrinkMutation(probability=probability, max_iterations=20)
+        ),
     ]
     for test_subject in test_subjects:
         mutation = test_subject.test_operator
-        result = tree_one_max_mutation_runner(repeats=repeats, threshold=threshold,
-                                              mutation=mutation)
+        result = tree_one_max_mutation_runner(
+            repeats=repeats, threshold=threshold, mutation=mutation
+        )
         test_subject.result = result
 
-    display_results(test_operators=test_subjects,
-                    repeats=repeats,
-                    x_label='Mutations (best to worst)',
-                    title='Tree Mutations Comparison')
+    display_results(
+        test_operators=test_subjects,
+        repeats=repeats,
+        x_label="Mutations (best to worst)",
+        title="Tree Mutations Comparison",
+    )
 
 
 def tree_one_max_mutation_runner(repeats, threshold, mutation):
@@ -95,9 +114,9 @@ def tree_one_max_mutation_runner(repeats, threshold, mutation):
         algo.evolve()
         algo.execute(x=2, y=3, z=4)
         total_generations += algo.final_generation_
-        print(f'\nIteration:{iteration}\n')
+        print(f"\nIteration:{iteration}\n")
     return total_generations / repeats
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     compare_tree_mutations()

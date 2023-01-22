@@ -1,16 +1,31 @@
 from eckity.algorithms.simple_evolution import SimpleEvolution
 from eckity.breeders.simple_breeder import SimpleBreeder
 from eckity.creators.ga_creators.float_vector_creator import GAFloatVectorCreator
-from eckity.genetic_operators.crossovers.vector_k_point_crossover import VectorKPointsCrossover
-from eckity.genetic_operators.mutations.vector_random_mutation import FloatVectorUniformNPointMutation, \
-    FloatVectorGaussNPointMutation, FloatVectorGaussOnePointMutation, FloatVectorUniformOnePointMutation
+from eckity.genetic_operators.crossovers.vector_k_point_crossover import (
+    VectorKPointsCrossover,
+)
+from eckity.genetic_operators.mutations.vector_random_mutation import (
+    FloatVectorUniformNPointMutation,
+    FloatVectorGaussNPointMutation,
+    FloatVectorGaussOnePointMutation,
+    FloatVectorUniformOnePointMutation,
+)
 from eckity.genetic_operators.selections.tournament_selection import TournamentSelection
 from eckity.statistics.best_average_worst_statistics import BestAverageWorstStatistics
 from eckity.subpopulation import Subpopulation
-from eckity.termination_checkers.threshold_from_target_termination_checker import ThresholdFromTargetTerminationChecker
+from eckity.termination_checkers.threshold_from_target_termination_checker import (
+    ThresholdFromTargetTerminationChecker,
+)
 
-from analysis.analysis_utils import TestOperatorWrapper, display_results, OneMaxEvaluator
-from evokity.mutations import FloatVectorMultiplierNPointMutation, VectorShuffleIndexesNPointMutation
+from analysis.analysis_utils import (
+    TestOperatorWrapper,
+    display_results,
+    OneMaxEvaluator,
+)
+from evokity.mutations import (
+    FloatVectorMultiplierNPointMutation,
+    VectorShuffleIndexesNPointMutation,
+)
 
 
 def compare_float_vector_mutations():
@@ -19,28 +34,43 @@ def compare_float_vector_mutations():
     length = 10
     probability = 0.3
     test_operators = [
-        TestOperatorWrapper("Multiplier 0-1",
-                            FloatVectorMultiplierNPointMutation(probability=probability, n=length, left_bound=0.,
-                                                                right_bound=1.)),
-        TestOperatorWrapper("Shuffle", VectorShuffleIndexesNPointMutation(probability=probability, n=length)),
-        TestOperatorWrapper("Uniform N",
-                            FloatVectorUniformNPointMutation(probability=probability, n=length)),
-        TestOperatorWrapper("Gauss N", FloatVectorGaussNPointMutation(probability=probability, n=length)),
-        TestOperatorWrapper("Gauss 1",
-                            FloatVectorGaussOnePointMutation(probability=probability)),
-        TestOperatorWrapper("Uniform 1",
-                            FloatVectorUniformOnePointMutation(probability=probability)),
+        TestOperatorWrapper(
+            "Multiplier 0-1",
+            FloatVectorMultiplierNPointMutation(
+                probability=probability, n=length, left_bound=0.0, right_bound=1.0
+            ),
+        ),
+        TestOperatorWrapper(
+            "Shuffle",
+            VectorShuffleIndexesNPointMutation(probability=probability, n=length),
+        ),
+        TestOperatorWrapper(
+            "Uniform N",
+            FloatVectorUniformNPointMutation(probability=probability, n=length),
+        ),
+        TestOperatorWrapper(
+            "Gauss N", FloatVectorGaussNPointMutation(probability=probability, n=length)
+        ),
+        TestOperatorWrapper(
+            "Gauss 1", FloatVectorGaussOnePointMutation(probability=probability)
+        ),
+        TestOperatorWrapper(
+            "Uniform 1", FloatVectorUniformOnePointMutation(probability=probability)
+        ),
     ]
     for test_class in test_operators:
         mutation = test_class.test_operator
-        result = float_vector_one_max_mutation_runner(repeats=repeats, threshold=threshold,
-                                                      mutation=mutation, length=length)
+        result = float_vector_one_max_mutation_runner(
+            repeats=repeats, threshold=threshold, mutation=mutation, length=length
+        )
         test_class.result = result
 
-    display_results(test_operators=test_operators,
-                    repeats=repeats,
-                    x_label='Mutations (best to worst)',
-                    title='FloatVector Mutations Comparison')
+    display_results(
+        test_operators=test_operators,
+        repeats=repeats,
+        x_label="Mutations (best to worst)",
+        title="FloatVector Mutations Comparison",
+    )
 
 
 def float_vector_one_max_mutation_runner(repeats, threshold, mutation, length):
@@ -76,5 +106,5 @@ def float_vector_one_max_mutation_runner(repeats, threshold, mutation, length):
     return total_generations / repeats
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     compare_float_vector_mutations()

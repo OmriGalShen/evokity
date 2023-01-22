@@ -21,11 +21,11 @@ def display_results(test_operators, repeats, x_label, title):
     values = [x.result for x in test_operators]
     fig, ax = plt.subplots()
     colors = cm.tab20c.colors
-    colors = colors[:len(values)]
+    colors = colors[: len(values)]
     ax.bar(labels, values, label=labels)
-    ax.set_ylabel(f'Average generations (repeats={repeats})')
+    ax.set_ylabel(f"Average generations (repeats={repeats})")
     ax.set_xlabel(x_label)
     ax.set_title(title)
-    ax.bar(labels, values, color=colors[:len(values)])
+    ax.bar(labels, values, color=colors[: len(values)])
     fig.autofmt_xdate()
     plt.show()
