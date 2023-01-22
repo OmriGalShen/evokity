@@ -1,7 +1,7 @@
 <center><h1>Evokity</h1></center>
 
 <p align="center">
-Collection of essential <a href=https://github.com/EC-KitY/EC-KitY> Evolutionary Computation Kit</a> utilities
+Collection of essential <a href=https://github.com/EC-KitY/EC-KitY> Evolutionary Computation Kit</a> utilities.
 </p>
 
 <p align="center">
@@ -204,7 +204,12 @@ Select k individuals using stochastic universal sampling.
 
 # Analysis
 
-This section contains plots comparing how fast examples from EC-KitY converge to a solution, when using the different operators.
+This section contains plots comparing how fast examples from EC-KitY
+(symbolic regression and one-max)
+converge to a solution, when using the different operators.
+
+Each plot includes the average generation for the example to converge to
+a solution using one of Evokity's operators.
 
 The scripts for creating these plots can be found in the `analysis` directory.
 
