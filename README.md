@@ -233,6 +233,29 @@ To help with rapid development, we created a simple CI using GitHub Actions for 
 - [Amit Kummer](https://github.com/amitkummer "Amit Kummer").
 - [Omri Gal Shenhav](https://github.com/OmriGalShen "Omri Gal Shenhav").
 
+### Citation
+
+```
+@article{eckity2022,
+    author = {Sipper, Moshe and Halperin, Tomer and Tzruia, Itai and  Elyasaf, Achiya},
+    title = {{EC-KitY}: Evolutionary Computation Tool Kit in {Python}},
+    publisher = {arXiv},
+    year = {2022},
+    url = {https://arxiv.org/abs/2207.10367},
+    doi = {10.48550/ARXIV.2207.10367},
+}
+
+@misc{eckity2022git,
+    author = {Sipper, Moshe and Halperin, Tomer and Tzruia, Itai and  Elyasaf, Achiya},
+    title = {{EC-KitY}: Evolutionary Computation Tool Kit in {Python}},
+    year = {2022},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://www.eckity.org/} }
+}
+
+```
+
 # Development
 
 Requires `poetry` installed (tested with `v1.2.2`) [See Docs](https://python-poetry.org/docs/).
